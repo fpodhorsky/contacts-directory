@@ -15,4 +15,17 @@ class ContactRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Contact::class);
     }
+
+    public function getPaginatedContacts(int $currentPage = 1, int $limit = 10): array
+    {
+        $offset = ($currentPage - 1) * $limit;
+
+        $qb = $this->createQueryBuilder('c');
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+        $qb->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
 }

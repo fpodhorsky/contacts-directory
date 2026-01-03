@@ -59,6 +59,34 @@
 			{% endfor %}
 		</tbody>
 	</table>
+    {% if allPagesCount > 1 %}
+
+		{% if hasPrevPage %}
+			{% set prevPage = currentPage - 1 %}
+			{% if prevPage == 1 %}
+				<a href="{{ path('app_contact') }}">Předchozí</a>
+			{% else %}
+				<a href="{{ path('app_contact', {'page': prevPage}) }}">Předchozí</a>
+			{% endif %}
+		{% endif %}
+
+		{% for i in range(1, allPagesCount) %}
+			{% if i == currentPage %}
+				<strong>{{ i }}</strong>
+			{% else %}
+				{% if i == 1 %}
+					<a href="{{ path('app_contact') }}">{{ i }}</a>
+				{% else %}
+					<a href="{{ path('app_contact', {'page': i}) }}">{{ i }}</a>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+
+		{% if hasNextPage %}
+			<a href="{{ path('app_contact', {'page': currentPage + 1}) }}">Další</a>
+		{% endif %}
+
+	{% endif %}
 {% endblock %}
 
 {% block footerScripts %}
