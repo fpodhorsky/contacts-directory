@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Repository\ContactRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +14,7 @@ final class ContactController extends AbstractController
 {
     public function __construct(
         private readonly ContactRepository $contactRepository,
+        private readonly EntityManagerInterface $entityManager,
     ) {}
 
     #[Route('/', name: 'app_contact')]
@@ -40,5 +43,14 @@ final class ContactController extends AbstractController
             'hasPrevPage' => $hasPrevPage,
             'hasNextPage' => $hasNextPage,
         ]);
+    }
+
+    #[Route('/contact/{id}/delete', name: 'app_contact_delete')]
+    public function delete(Contact $contact, Request $request): Response
+    {
+        $this->entityManager->remove($contact);
+        $this->entityManager->flush();
+
+        return $this->redirect($request->headers->get('referer') ?? '/');
     }
 }

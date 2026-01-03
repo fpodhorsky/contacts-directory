@@ -47,7 +47,7 @@
 					<td>
 						<a href="#">Upravit</a>
 						|
-						<a href="#">
+						<a href="{{ path('app_contact_delete', {'id': contact.id}) }}" onclick="return confirm('Opravdu chcete kontakt smazat?');">
 							Smazat
 						</a>
 					</td>
@@ -59,6 +59,7 @@
 			{% endfor %}
 		</tbody>
 	</table>
+
     {% if allPagesCount > 1 %}
 
 		{% if hasPrevPage %}
