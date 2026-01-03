@@ -51,6 +51,6 @@ Lokální požadavky:
    ```
 
 Aplikace poběží na:
- ```cpp
+ ```
   http://127.0.0.1:8000
    ```
