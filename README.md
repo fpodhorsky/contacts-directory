@@ -47,10 +47,10 @@ Lokální požadavky:
    nebo
 
    ```bash
-  php -S 127.0.0.1:8000 -t public
+   php -S 127.0.0.1:8000 -t public
    ```
 
 Aplikace poběží na:
  ```
-  http://127.0.0.1:8000
-   ```
+ http://127.0.0.1:8000
+ ```
