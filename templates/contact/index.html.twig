@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kontakty{% endblock %}
+
+{% block body %}
+	<a href="#">Vytvořit nový kontakt</a>
+	<table border="1" cellpadding="5" cellspacing="0">
+		<thead>
+			<tr>
+				<th>Jméno</th>
+				<th>Příjmení</th>
+				<th>Email</th>
+				<th>Telefon</th>
+				<th>Poznámka</th>
+				<th>Akce</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for contact in contacts %}
+				<tr>
+					<td>{{ contact.firstName }}</td>
+					<td>{{ contact.lastName }}</td>
+					<td>{{ contact.email }}</td>
+					<td>{{ contact.phoneNumber ?: '—' }}</td>
+					<td>
+						{% if contact.note %}
+							<button type="button" onclick="document.getElementById('note-{{ contact.id }}').showModal()">
+								Zobrazit poznámku
+							</button>
+
+							<dialog id="note-{{ contact.id }}" class="note-dialog">
+								<div class="note-content">
+									<p>
+										<strong>Poznámka:</strong>
+									</p>
+									<p>{{ contact.note }}</p>
+
+									<form method="dialog">
+										<button>Zavřít</button>
+									</form>
+								</div>
+							</dialog>
+						{% else %}
+							—
+						{% endif %}
+					</td>
+					<td>
+						<a href="#">Upravit</a>
+						|
+						<a href="#">
+							Smazat
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">Zatím nebyly přidány žádné kontakty.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
+
+{% block footerScripts %}
+	<script>
+		document.querySelectorAll('.note-dialog').forEach((dialog) => {
+            dialog.addEventListener('click', (event) => {
+                const content = dialog.querySelector('.note-content');
+
+                if (! content.contains(event.target)) {
+                    dialog.close();
+                }
+            });
+        });
+	</script>
+{% endblock %}
