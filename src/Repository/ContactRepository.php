@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Contact;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,6 +22,7 @@ class ContactRepository extends ServiceEntityRepository
         $offset = ($currentPage - 1) * $limit;
 
         $qb = $this->createQueryBuilder('c');
+        $qb->orderBy('c.last_name', 'ASC');
         if ($offset) {
             $qb->setFirstResult($offset);
         }

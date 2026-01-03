@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+
+	<a href="{{ path('app_contact') }}">Výpis kontaktů</a>
+	{{ form_start(form) }}
+	<table border="1" cellpadding="5" cellspacing="0">
+		<tbody>
+			<tr>
+				<td>{{ form_label(form.slug) }}</td>
+				<td>{{ form_widget(form.slug) }}</td>
+			</tr>
+			<tr>
+				<td>{{ form_label(form.first_name) }}</td>
+				<td>
+					{{ form_errors(form.first_name) }}
+					{{ form_widget(form.first_name) }}
+				</td>
+			</tr>
+			<tr>
+				<td>{{ form_label(form.last_name) }}</td>
+				<td>
+					{{ form_errors(form.last_name) }}
+					{{ form_widget(form.last_name) }}
+				</td>
+			</tr>
+			<tr>
+				<td>{{ form_label(form.phone_number) }}</td>
+				<td>{{ form_widget(form.phone_number) }}</td>
+			</tr>
+			<tr>
+				<td>{{ form_label(form.email) }}</td>
+				<td>
+					{{ form_errors(form.email) }}
+					{{ form_widget(form.email) }}
+				</td>
+			</tr>
+			<tr>
+				<td>{{ form_label(form.note) }}</td>
+				<td>{{ form_widget(form.note) }}</td>
+			</tr>
+			<tr>
+				<td>
+					{% if contact is defined %}
+						<a href="{{ path('app_contact_delete', {'id': contact.id}) }}" onclick="return confirm('Opravdu chcete kontakt smazat?');">
+							Smazat
+						</a>
+					{% endif %}
+				</td>
+				<td>{{ form_widget(form.submit) }}</td>
+			</tr>
+		</tbody>
+	</table>
+	{{ form_end(form) }}
+{% endblock %}

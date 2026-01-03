@@ -3,7 +3,7 @@
 {% block title %}Kontakty{% endblock %}
 
 {% block body %}
-	<a href="#">Vytvořit nový kontakt</a>
+	<a href="{{ path('app_contact_new') }}">Vytvořit nový kontakt</a>
 	<table border="1" cellpadding="5" cellspacing="0">
 		<thead>
 			<tr>
@@ -45,7 +45,7 @@
 						{% endif %}
 					</td>
 					<td>
-						<a href="#">Upravit</a>
+						<a href="{{ path('app_contact_update', {'slug': contact.slug}) }}">Upravit</a>
 						|
 						<a href="{{ path('app_contact_delete', {'id': contact.id}) }}" onclick="return confirm('Opravdu chcete kontakt smazat?');">
 							Smazat
