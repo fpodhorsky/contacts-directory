@@ -5,7 +5,7 @@ Jednoduchý adresář kontaktů postavený na Symfony. Kontakty se ukládají do
 ## Funkce
 
 - Výpis kontaktů na URL `/` (seznam s paginací)
-- Detail - Editace kontaktu na URL `/{slug}` (SEO URL podle jména/příjmení)
+- Detail - Editace kontaktu na URL `/{slug}`
 - Detail - vytvoření nového kontaktu na URL `/contact/new`
 - Smazání kontaktu přes `/contact/{id}/delete`
 - Automatické generování unikátního slugu z jména a příjmení
